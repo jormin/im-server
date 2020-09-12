@@ -8,6 +8,8 @@
 
 namespace App\Services;
 
+use App\Lib\Redis;
+use App\Traits\ResponseTrait;
 use App\Traits\SenderTrait;
 use Swoft\Bean\Annotation\Inject;
 use Swoft\Rpc\Server\Bean\Annotation\Service;
@@ -22,9 +24,11 @@ class BaseService
 
     use SenderTrait;
 
+    use ResponseTrait;
+
     /**
      * @Inject()
-     * @var \Swoft\Redis\Redis
+     * @var Redis
      */
     protected $redis;
 }

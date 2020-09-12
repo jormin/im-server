@@ -13,7 +13,7 @@ use Swoft\Db\Types;
  * 手机验证码表
 
  * @Entity()
- * @Table(name="phone_code")
+ * @Table(name="im_phone_code")
  * @uses      PhoneCode
  */
 class PhoneCode extends Model
@@ -26,38 +26,38 @@ class PhoneCode extends Model
     private $id;
 
     /**
-     * @var int $pcType 类型 0:注册 1:重置密码 2:修改密码
-     * @Column(name="pc_type", type="tinyint")
+     * @var int $type 类型 0:注册 1:重置密码 2:修改密码
+     * @Column(name="type", type="tinyint")
      * @Required()
      */
-    private $pcType;
+    private $type;
 
     /**
-     * @var string $pcPhone 手机号
-     * @Column(name="pc_phone", type="char", length=11)
+     * @var string $phone 手机号
+     * @Column(name="phone", type="char", length=11)
      * @Required()
      */
-    private $pcPhone;
+    private $phone;
 
     /**
-     * @var string $pcCode 验证码
-     * @Column(name="pc_code", type="char", length=6)
+     * @var string $code 验证码
+     * @Column(name="code", type="char", length=6)
      * @Required()
      */
-    private $pcCode;
+    private $code;
 
     /**
-     * @var int $pcExpireTime 过期时间
-     * @Column(name="pc_expire_time", type="integer")
+     * @var int $expireTime 过期时间
+     * @Column(name="expire_time", type="integer")
      * @Required()
      */
-    private $pcExpireTime;
+    private $expireTime;
 
     /**
-     * @var int $pcValidateTime 验证时间
-     * @Column(name="pc_validate_time", type="integer", default=0)
+     * @var int $validateTime 验证时间
+     * @Column(name="validate_time", type="integer", default=0)
      */
-    private $pcValidateTime;
+    private $validateTime;
 
     /**
      * @var int $createTime 创建时间戳
@@ -83,9 +83,9 @@ class PhoneCode extends Model
      * @param int $value
      * @return $this
      */
-    public function setPcType(int $value): self
+    public function setType(int $value): self
     {
-        $this->pcType = $value;
+        $this->type = $value;
 
         return $this;
     }
@@ -95,9 +95,9 @@ class PhoneCode extends Model
      * @param string $value
      * @return $this
      */
-    public function setPcPhone(string $value): self
+    public function setPhone(string $value): self
     {
-        $this->pcPhone = $value;
+        $this->phone = $value;
 
         return $this;
     }
@@ -107,9 +107,9 @@ class PhoneCode extends Model
      * @param string $value
      * @return $this
      */
-    public function setPcCode(string $value): self
+    public function setCode(string $value): self
     {
-        $this->pcCode = $value;
+        $this->code = $value;
 
         return $this;
     }
@@ -119,9 +119,9 @@ class PhoneCode extends Model
      * @param int $value
      * @return $this
      */
-    public function setPcExpireTime(int $value): self
+    public function setExpireTime(int $value): self
     {
-        $this->pcExpireTime = $value;
+        $this->expireTime = $value;
 
         return $this;
     }
@@ -131,9 +131,9 @@ class PhoneCode extends Model
      * @param int $value
      * @return $this
      */
-    public function setPcValidateTime(int $value): self
+    public function setValidateTime(int $value): self
     {
-        $this->pcValidateTime = $value;
+        $this->validateTime = $value;
 
         return $this;
     }
@@ -163,45 +163,45 @@ class PhoneCode extends Model
      * 类型 0:注册 1:重置密码 2:修改密码
      * @return int
      */
-    public function getPcType()
+    public function getType()
     {
-        return $this->pcType;
+        return $this->type;
     }
 
     /**
      * 手机号
      * @return string
      */
-    public function getPcPhone()
+    public function getPhone()
     {
-        return $this->pcPhone;
+        return $this->phone;
     }
 
     /**
      * 验证码
      * @return string
      */
-    public function getPcCode()
+    public function getCode()
     {
-        return $this->pcCode;
+        return $this->code;
     }
 
     /**
      * 过期时间
      * @return int
      */
-    public function getPcExpireTime()
+    public function getExpireTime()
     {
-        return $this->pcExpireTime;
+        return $this->expireTime;
     }
 
     /**
      * 验证时间
      * @return int
      */
-    public function getPcValidateTime()
+    public function getValidateTime()
     {
-        return $this->pcValidateTime;
+        return $this->validateTime;
     }
 
     /**

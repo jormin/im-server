@@ -13,7 +13,7 @@ use Swoft\Db\Types;
  * 消息扩展信息表
 
  * @Entity()
- * @Table(name="message_extend")
+ * @Table(name="im_message_extend")
  * @uses      MessageExtend
  */
 class MessageExtend extends Model
@@ -33,37 +33,37 @@ class MessageExtend extends Model
     private $messageId;
 
     /**
-     * @var string $meSenderIp 发送方IP
-     * @Column(name="me_sender_ip", type="string", length=15)
+     * @var string $senderIp 发送方IP
+     * @Column(name="sender_ip", type="string", length=15)
      * @Required()
      */
-    private $meSenderIp;
+    private $senderIp;
 
     /**
-     * @var string $meSenderIpAddress 发送方IP对应地区
-     * @Column(name="me_sender_ip_address", type="string", length=100)
+     * @var string $senderIpAddress 发送方IP对应地区
+     * @Column(name="sender_ip_address", type="string", length=100)
      * @Required()
      */
-    private $meSenderIpAddress;
+    private $senderIpAddress;
 
     /**
-     * @var float $meSenderLongitude 发送方GPS经度
-     * @Column(name="me_sender_longitude", type="decimal", default=0)
+     * @var float $senderLongitude 发送方GPS经度
+     * @Column(name="sender_longitude", type="decimal", default=0)
      */
-    private $meSenderLongitude;
+    private $senderLongitude;
 
     /**
-     * @var float $meSenderLatitude 发送方GPS纬度
-     * @Column(name="me_sender_latitude", type="decimal", default=0)
+     * @var float $senderLatitude 发送方GPS纬度
+     * @Column(name="sender_latitude", type="decimal", default=0)
      */
-    private $meSenderLatitude;
+    private $senderLatitude;
 
     /**
-     * @var int $meSource 消息来源 0:手机网页 1:PC网页 2:Android客户端 3:IOS客户端 4:WindowsPC端 5:Mac客户端 6:接口调用
-     * @Column(name="me_source", type="tinyint")
+     * @var int $source 消息来源 0:手机网页 1:PC网页 2:Android客户端 3:IOS客户端 4:WindowsPC端 5:MAC端 6:接口调用
+     * @Column(name="source", type="tinyint")
      * @Required()
      */
-    private $meSource;
+    private $source;
 
     /**
      * ID
@@ -94,9 +94,9 @@ class MessageExtend extends Model
      * @param string $value
      * @return $this
      */
-    public function setMeSenderIp(string $value): self
+    public function setSenderIp(string $value): self
     {
-        $this->meSenderIp = $value;
+        $this->senderIp = $value;
 
         return $this;
     }
@@ -106,9 +106,9 @@ class MessageExtend extends Model
      * @param string $value
      * @return $this
      */
-    public function setMeSenderIpAddress(string $value): self
+    public function setSenderIpAddress(string $value): self
     {
-        $this->meSenderIpAddress = $value;
+        $this->senderIpAddress = $value;
 
         return $this;
     }
@@ -118,9 +118,9 @@ class MessageExtend extends Model
      * @param float $value
      * @return $this
      */
-    public function setMeSenderLongitude(float $value): self
+    public function setSenderLongitude(float $value): self
     {
-        $this->meSenderLongitude = $value;
+        $this->senderLongitude = $value;
 
         return $this;
     }
@@ -130,9 +130,9 @@ class MessageExtend extends Model
      * @param float $value
      * @return $this
      */
-    public function setMeSenderLatitude(float $value): self
+    public function setSenderLatitude(float $value): self
     {
-        $this->meSenderLatitude = $value;
+        $this->senderLatitude = $value;
 
         return $this;
     }
@@ -142,9 +142,9 @@ class MessageExtend extends Model
      * @param int $value
      * @return $this
      */
-    public function setMeSource(int $value): self
+    public function setSource(int $value): self
     {
-        $this->meSource = $value;
+        $this->source = $value;
 
         return $this;
     }
@@ -171,45 +171,45 @@ class MessageExtend extends Model
      * 发送方IP
      * @return string
      */
-    public function getMeSenderIp()
+    public function getSenderIp()
     {
-        return $this->meSenderIp;
+        return $this->senderIp;
     }
 
     /**
      * 发送方IP对应地区
      * @return string
      */
-    public function getMeSenderIpAddress()
+    public function getSenderIpAddress()
     {
-        return $this->meSenderIpAddress;
+        return $this->senderIpAddress;
     }
 
     /**
      * 发送方GPS经度
      * @return mixed
      */
-    public function getMeSenderLongitude()
+    public function getSenderLongitude()
     {
-        return $this->meSenderLongitude;
+        return $this->senderLongitude;
     }
 
     /**
      * 发送方GPS纬度
      * @return mixed
      */
-    public function getMeSenderLatitude()
+    public function getSenderLatitude()
     {
-        return $this->meSenderLatitude;
+        return $this->senderLatitude;
     }
 
     /**
      * 消息来源 0:手机网页 1:PC网页 2:Android客户端 3:IOS客户端 4:WindowsPC端 5:MAC端 6:接口调用
      * @return int
      */
-    public function getMeSource()
+    public function getSource()
     {
-        return $this->meSource;
+        return $this->source;
     }
 
 }

@@ -31,6 +31,8 @@ class ServerStartListener implements WorkerStartInterface
             ProcessBuilder::create('imDistribute')->start();
             // 启动聊天消息持久化进程
             ProcessBuilder::create('imMessagePersistence')->start();
+            // 启动发送短信验证码进程
+            ProcessBuilder::create('phoneCode')->start();
         }
     }
 

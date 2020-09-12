@@ -13,7 +13,7 @@ use Swoft\Db\Types;
  * 消息内容表，存储消息表中 message_type 为 0(文本)|5(位置) 的消息，如果是位置消息，存储格式为：经度,纬度
 
  * @Entity()
- * @Table(name="message_content")
+ * @Table(name="im_message_content")
  * @uses      MessageContent
  */
 class MessageContent extends Model
@@ -33,11 +33,11 @@ class MessageContent extends Model
     private $messageId;
 
     /**
-     * @var string $mcContent 消息内容
-     * @Column(name="mc_content", type="string", length=6000)
+     * @var string $content 消息内容
+     * @Column(name="content", type="string", length=6000)
      * @Required()
      */
-    private $mcContent;
+    private $content;
 
     /**
      * ID
@@ -68,9 +68,9 @@ class MessageContent extends Model
      * @param string $value
      * @return $this
      */
-    public function setMcContent(string $value): self
+    public function setContent(string $value): self
     {
-        $this->mcContent = $value;
+        $this->content = $value;
 
         return $this;
     }
@@ -97,9 +97,9 @@ class MessageContent extends Model
      * 消息内容
      * @return string
      */
-    public function getMcContent()
+    public function getContent()
     {
-        return $this->mcContent;
+        return $this->content;
     }
 
 }

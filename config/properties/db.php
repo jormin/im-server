@@ -20,6 +20,7 @@ return [
         'timeout'     => 8,
         'maxIdleTime' => 60,
         'maxWaitTime' => 3,
+        'prefix' => 'im_'
     ],
 
     'slave' => [

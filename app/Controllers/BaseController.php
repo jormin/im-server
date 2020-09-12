@@ -1,34 +1,46 @@
 <?php
 /**
- * This file is part of Swoft.
- *
- * @link https://swoft.org
- * @document https://doc.swoft.org
- * @contact group@swoft.org
- * @license https://github.com/swoft-cloud/swoft/blob/master/LICENSE
+ * Created by PhpStorm.
+ * User: Jormin
+ * Date: 2019-01-08
+ * Time: 13:13
  */
 
 namespace App\Controllers;
 
-use Swoft\Http\Server\Bean\Annotation\Controller;
-use Swoft\Http\Server\Bean\Annotation\RequestMapping;
-use Swoft\Http\Server\Bean\Annotation\RequestMethod;
-// use Swoft\View\Bean\Annotation\View;
-// use Swoft\Http\Message\Server\Response;
+
+use App\Models\Data\UserData;
+use App\Models\Entity\User;
+use App\Traits\ResponseTrait;
+use Swoft\Bean\Annotation\Inject;
 
 /**
- * Class BaseController
- * @Controller(prefix="/")
+ * 基础控制器
  * @package App\Controllers
  */
-class BaseController{
+class BaseController
+{
+
+    use ResponseTrait;
+
     /**
-     * this is a example action. access uri path: /Base
-     * @RequestMapping(route="/Base", method=RequestMethod::GET)
-     * @return array
+     * @var array 当前请求参数
      */
-    public function index(): array
+    protected $params;
+
+    /**
+     * 获取请求参数
+     * @param string $param
+     * @return mixed|null
+     */
+    public function getParam(string $param){
+        $request = request();
+        $this->params = $request->getMethod() === 'GET' ? $request->query() : $request->post();
+        return $this->params[$param] ?? null;
+    }
+
+    public function __destruct()
     {
-        return ['item0', 'item1'];
+        unset($this->params);
     }
 }

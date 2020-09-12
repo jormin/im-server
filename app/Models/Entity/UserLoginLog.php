@@ -13,7 +13,7 @@ use Swoft\Db\Types;
  * 用户登录日志表
 
  * @Entity()
- * @Table(name="user_login_log")
+ * @Table(name="im_user_login_log")
  * @uses      UserLoginLog
  */
 class UserLoginLog extends Model
@@ -33,44 +33,44 @@ class UserLoginLog extends Model
     private $userId;
 
     /**
-     * @var int $ullLoginTime 登录时间
-     * @Column(name="ull_login_time", type="integer")
+     * @var int $loginTime 登录时间
+     * @Column(name="login_time", type="integer")
      * @Required()
      */
-    private $ullLoginTime;
+    private $loginTime;
 
     /**
-     * @var string $ullIp IP
-     * @Column(name="ull_ip", type="string", length=15)
+     * @var string $ip IP
+     * @Column(name="ip", type="string", length=15)
      * @Required()
      */
-    private $ullIp;
+    private $ip;
 
     /**
-     * @var string $ullIpAddress IP所在地区
-     * @Column(name="ull_ip_address", type="string", length=50)
+     * @var string $ipAddress IP所在地区
+     * @Column(name="ip_address", type="string", length=50)
      * @Required()
      */
-    private $ullIpAddress;
+    private $ipAddress;
 
     /**
-     * @var float $ullLongitude GPS经度
-     * @Column(name="ull_longitude", type="decimal", default=0)
+     * @var float $longitude GPS经度
+     * @Column(name="longitude", type="decimal", default=0)
      */
-    private $ullLongitude;
+    private $longitude;
 
     /**
-     * @var float $ullLatitude GPS纬度
-     * @Column(name="ull_latitude", type="decimal", default=0)
+     * @var float $latitude GPS纬度
+     * @Column(name="latitude", type="decimal", default=0)
      */
-    private $ullLatitude;
+    private $latitude;
 
     /**
-     * @var int $ullSource 登录来源 0:手机网页 1:PC网页 2:Android客户端 3:IOS客户端 4:WindowsPC端 5:MAC端 6:接口调用
-     * @Column(name="ull_source", type="tinyint")
+     * @var int $source 登录来源 0:手机网页 1:PC网页 2:Android客户端 3:IOS客户端 4:WindowsPC端 5:MAC端 6:接口调用
+     * @Column(name="source", type="tinyint")
      * @Required()
      */
-    private $ullSource;
+    private $source;
 
     /**
      * ID
@@ -101,9 +101,9 @@ class UserLoginLog extends Model
      * @param int $value
      * @return $this
      */
-    public function setUllLoginTime(int $value): self
+    public function setLoginTime(int $value): self
     {
-        $this->ullLoginTime = $value;
+        $this->loginTime = $value;
 
         return $this;
     }
@@ -113,9 +113,9 @@ class UserLoginLog extends Model
      * @param string $value
      * @return $this
      */
-    public function setUllIp(string $value): self
+    public function setIp(string $value): self
     {
-        $this->ullIp = $value;
+        $this->ip = $value;
 
         return $this;
     }
@@ -125,9 +125,9 @@ class UserLoginLog extends Model
      * @param string $value
      * @return $this
      */
-    public function setUllIpAddress(string $value): self
+    public function setIpAddress(string $value): self
     {
-        $this->ullIpAddress = $value;
+        $this->ipAddress = $value;
 
         return $this;
     }
@@ -137,9 +137,9 @@ class UserLoginLog extends Model
      * @param float $value
      * @return $this
      */
-    public function setUllLongitude(float $value): self
+    public function setLongitude(float $value): self
     {
-        $this->ullLongitude = $value;
+        $this->longitude = $value;
 
         return $this;
     }
@@ -149,9 +149,9 @@ class UserLoginLog extends Model
      * @param float $value
      * @return $this
      */
-    public function setUllLatitude(float $value): self
+    public function setLatitude(float $value): self
     {
-        $this->ullLatitude = $value;
+        $this->latitude = $value;
 
         return $this;
     }
@@ -161,9 +161,9 @@ class UserLoginLog extends Model
      * @param int $value
      * @return $this
      */
-    public function setUllSource(int $value): self
+    public function setSource(int $value): self
     {
-        $this->ullSource = $value;
+        $this->source = $value;
 
         return $this;
     }
@@ -190,54 +190,54 @@ class UserLoginLog extends Model
      * 登录时间
      * @return int
      */
-    public function getUllLoginTime()
+    public function getLoginTime()
     {
-        return $this->ullLoginTime;
+        return $this->loginTime;
     }
 
     /**
      * IP
      * @return string
      */
-    public function getUllIp()
+    public function getIp()
     {
-        return $this->ullIp;
+        return $this->ip;
     }
 
     /**
      * IP所在地区
      * @return string
      */
-    public function getUllIpAddress()
+    public function getIpAddress()
     {
-        return $this->ullIpAddress;
+        return $this->ipAddress;
     }
 
     /**
      * GPS经度
      * @return mixed
      */
-    public function getUllLongitude()
+    public function getLongitude()
     {
-        return $this->ullLongitude;
+        return $this->longitude;
     }
 
     /**
      * GPS纬度
      * @return mixed
      */
-    public function getUllLatitude()
+    public function getLatitude()
     {
-        return $this->ullLatitude;
+        return $this->latitude;
     }
 
     /**
      * 登录来源 0:手机网页 1:PC网页 2:Android客户端 3:IOS客户端 4:WindowsPC端 5:MAC端 6:接口调用
      * @return int
      */
-    public function getUllSource()
+    public function getSource()
     {
-        return $this->ullSource;
+        return $this->source;
     }
 
 }

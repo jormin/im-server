@@ -13,7 +13,7 @@ use Swoft\Db\Types;
  * 用户扩展信息表
 
  * @Entity()
- * @Table(name="user_extend")
+ * @Table(name="im_user_extend")
  * @uses      UserExtend
  */
 class UserExtend extends Model
@@ -33,37 +33,37 @@ class UserExtend extends Model
     private $userId;
 
     /**
-     * @var string $ueRegisterIp 注册IP
-     * @Column(name="ue_register_ip", type="string", length=15)
+     * @var string $registerIp 注册IP
+     * @Column(name="register_ip", type="string", length=15)
      * @Required()
      */
-    private $ueRegisterIp;
+    private $registerIp;
 
     /**
-     * @var string $ueRegisterIpAddress 注册IP对应地区
-     * @Column(name="ue_register_ip_address", type="string", length=100)
+     * @var string $registerIpAddress 注册IP对应地区
+     * @Column(name="register_ip_address", type="string", length=100)
      * @Required()
      */
-    private $ueRegisterIpAddress;
+    private $registerIpAddress;
 
     /**
-     * @var float $ueRegisterLongitude 注册GPS经度
-     * @Column(name="ue_register_longitude", type="decimal", default=0)
+     * @var float $registerLongitude 注册GPS经度
+     * @Column(name="register_longitude", type="decimal", default=0)
      */
-    private $ueRegisterLongitude;
+    private $registerLongitude;
 
     /**
-     * @var float $ueRegisterLatitude 注册GPS纬度
-     * @Column(name="ue_register_latitude", type="decimal", default=0)
+     * @var float $registerLatitude 注册GPS纬度
+     * @Column(name="register_latitude", type="decimal", default=0)
      */
-    private $ueRegisterLatitude;
+    private $registerLatitude;
 
     /**
-     * @var int $ueSource 注册来源 0:手机网页 1:PC网页 2:Android客户端 3:IOS客户端 4:WindowsPC端 5:MAC端 6:接口调用
-     * @Column(name="ue_source", type="tinyint")
+     * @var int $source 注册来源 0:手机网页 1:PC网页 2:Android客户端 3:IOS客户端 4:WindowsPC端 5:MAC端 6:接口调用
+     * @Column(name="source", type="tinyint")
      * @Required()
      */
-    private $ueSource;
+    private $source;
 
     /**
      * ID
@@ -94,9 +94,9 @@ class UserExtend extends Model
      * @param string $value
      * @return $this
      */
-    public function setUeRegisterIp(string $value): self
+    public function setRegisterIp(string $value): self
     {
-        $this->ueRegisterIp = $value;
+        $this->registerIp = $value;
 
         return $this;
     }
@@ -106,9 +106,9 @@ class UserExtend extends Model
      * @param string $value
      * @return $this
      */
-    public function setUeRegisterIpAddress(string $value): self
+    public function setRegisterIpAddress(string $value): self
     {
-        $this->ueRegisterIpAddress = $value;
+        $this->registerIpAddress = $value;
 
         return $this;
     }
@@ -118,9 +118,9 @@ class UserExtend extends Model
      * @param float $value
      * @return $this
      */
-    public function setUeRegisterLongitude(float $value): self
+    public function setRegisterLongitude(float $value): self
     {
-        $this->ueRegisterLongitude = $value;
+        $this->registerLongitude = $value;
 
         return $this;
     }
@@ -130,9 +130,9 @@ class UserExtend extends Model
      * @param float $value
      * @return $this
      */
-    public function setUeRegisterLatitude(float $value): self
+    public function setRegisterLatitude(float $value): self
     {
-        $this->ueRegisterLatitude = $value;
+        $this->registerLatitude = $value;
 
         return $this;
     }
@@ -142,9 +142,9 @@ class UserExtend extends Model
      * @param int $value
      * @return $this
      */
-    public function setUeSource(int $value): self
+    public function setSource(int $value): self
     {
-        $this->ueSource = $value;
+        $this->source = $value;
 
         return $this;
     }
@@ -171,45 +171,45 @@ class UserExtend extends Model
      * 注册IP
      * @return string
      */
-    public function getUeRegisterIp()
+    public function getRegisterIp()
     {
-        return $this->ueRegisterIp;
+        return $this->registerIp;
     }
 
     /**
      * 注册IP对应地区
      * @return string
      */
-    public function getUeRegisterIpAddress()
+    public function getRegisterIpAddress()
     {
-        return $this->ueRegisterIpAddress;
+        return $this->registerIpAddress;
     }
 
     /**
      * 注册GPS经度
      * @return mixed
      */
-    public function getUeRegisterLongitude()
+    public function getRegisterLongitude()
     {
-        return $this->ueRegisterLongitude;
+        return $this->registerLongitude;
     }
 
     /**
      * 注册GPS纬度
      * @return mixed
      */
-    public function getUeRegisterLatitude()
+    public function getRegisterLatitude()
     {
-        return $this->ueRegisterLatitude;
+        return $this->registerLatitude;
     }
 
     /**
      * 注册来源 0:手机网页 1:PC网页 2:Android客户端 3:IOS客户端 4:WindowsPC端 5:MAC端 6:接口调用
      * @return int
      */
-    public function getUeSource()
+    public function getSource()
     {
-        return $this->ueSource;
+        return $this->source;
     }
 
 }

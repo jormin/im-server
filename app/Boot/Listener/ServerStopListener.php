@@ -33,6 +33,8 @@ class ServerStopListener implements CloseInterface
         ProcessBuilder::get('imDistribute')->close();
         // 关闭聊天消息持久化进程
         ProcessBuilder::get('imMessagePersistence')->close();
+        // 关闭发送短信验证码进程
+        ProcessBuilder::get('phoneCode')->close();
     }
 
 }

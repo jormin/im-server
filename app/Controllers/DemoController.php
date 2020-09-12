@@ -178,4 +178,11 @@ class DemoController
         return $data;
     }
 
+    /**
+     * @RequestMapping(route="test", method=RequestMethod::GET)
+     */
+    public function test(){
+
+    }
+
 }

@@ -13,12 +13,14 @@ return [
             \Swoft\View\Middleware\ViewMiddleware::class,
             \Swoft\Devtool\Middleware\DevToolMiddleware::class,
             // \Swoft\Session\Middleware\SessionMiddleware::class,
+            \App\Middlewares\CorsMiddleware::class
         ]
     ],
     'httpRouter' => [
         'ignoreLastSlash' => false,
         'tmpCacheNumber' => 1000,
         'matchAll' => '',
+        'currentGroupPrefix' => '/api'
     ],
     'requestParser' => [
         'parsers' => [

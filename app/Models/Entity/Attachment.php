@@ -13,7 +13,7 @@ use Swoft\Db\Types;
  * 附件表
 
  * @Entity()
- * @Table(name="attachment")
+ * @Table(name="im_attachment")
  * @uses      Attachment
  */
 class Attachment extends Model
@@ -33,79 +33,73 @@ class Attachment extends Model
     private $userId;
 
     /**
-     * @var int $attachmentType 文件类型 0:图片 1:音频 2:视频 3:其它
-     * @Column(name="attachment_type", type="tinyint")
+     * @var int $type 文件类型 0:图片 1:音频 2:视频 3:其它
+     * @Column(name="type", type="tinyint")
      * @Required()
      */
-    private $attachmentType;
+    private $type;
 
     /**
-     * @var string $attachmentPath 文件存储路径
-     * @Column(name="attachment_path", type="string", length=100)
+     * @var string $path 文件存储路径
+     * @Column(name="path", type="string", length=100)
      * @Required()
      */
-    private $attachmentPath;
+    private $path;
 
     /**
-     * @var int $attachmentWidth 图片宽度
-     * @Column(name="attachment_width", type="smallint")
+     * @var int $width 图片宽度
+     * @Column(name="width", type="smallint")
      * @Required()
      */
-    private $attachmentWidth;
+    private $width;
 
     /**
-     * @var int $attachmentHeight 图片高度
-     * @Column(name="attachment_height", type="smallint")
+     * @var int $height 图片高度
+     * @Column(name="height", type="smallint")
      * @Required()
      */
-    private $attachmentHeight;
+    private $height;
 
     /**
-     * @var int $attachmentDuration 文件时长，单位为秒
-     * @Column(name="attachment_duration", type="smallint")
+     * @var int $duration 文件时长，单位为秒
+     * @Column(name="duration", type="smallint")
      * @Required()
      */
-    private $attachmentDuration;
+    private $duration;
 
     /**
-     * @var string $attachmentCover 文件封面路径
-     * @Column(name="attachment_cover", type="string", length=100)
+     * @var string $cover 文件封面路径
+     * @Column(name="cover", type="string", length=100)
      * @Required()
      */
-    private $attachmentCover;
+    private $cover;
 
     /**
-     * @var int $attachmentSize 文件尺寸，单位为字节(Byte)
-     * @Column(name="attachment_size", type="integer")
+     * @var int $size 文件尺寸，单位为字节(Byte)
+     * @Column(name="size", type="integer")
      * @Required()
      */
-    private $attachmentSize;
+    private $size;
 
     /**
-     * @var string $attachmentExtension 文件后缀
-     * @Column(name="attachment_extension", type="string", length=15)
+     * @var string $extension 文件后缀
+     * @Column(name="extension", type="string", length=15)
      * @Required()
      */
-    private $attachmentExtension;
+    private $extension;
 
     /**
-     * @var string $attachmentMime 文件MIME
-     * @Column(name="attachment_mime", type="string", length=100)
+     * @var string $mime 文件MIME
+     * @Column(name="mime", type="string", length=100)
      * @Required()
      */
-    private $attachmentMime;
+    private $mime;
 
     /**
-     * @var string $attachmentUploadDate 上传日期
-     * @Column(name="attachment_upload_date", type="char", length=10)
+     * @var int $uploadTime 上传时间
+     * @Column(name="upload_time", type="integer")
      */
-    private $attachmentUploadDate;
-
-    /**
-     * @var int $attachmentUploadTime 上传时间
-     * @Column(name="attachment_upload_time", type="integer")
-     */
-    private $attachmentUploadTime;
+    private $uploadTime;
 
     /**
      * ID
@@ -136,9 +130,9 @@ class Attachment extends Model
      * @param int $value
      * @return $this
      */
-    public function setAttachmentType(int $value): self
+    public function setType(int $value): self
     {
-        $this->attachmentType = $value;
+        $this->type = $value;
 
         return $this;
     }
@@ -148,9 +142,9 @@ class Attachment extends Model
      * @param string $value
      * @return $this
      */
-    public function setAttachmentPath(string $value): self
+    public function setPath(string $value): self
     {
-        $this->attachmentPath = $value;
+        $this->path = $value;
 
         return $this;
     }
@@ -160,9 +154,9 @@ class Attachment extends Model
      * @param int $value
      * @return $this
      */
-    public function setAttachmentWidth(int $value): self
+    public function setWidth(int $value): self
     {
-        $this->attachmentWidth = $value;
+        $this->width = $value;
 
         return $this;
     }
@@ -172,9 +166,9 @@ class Attachment extends Model
      * @param int $value
      * @return $this
      */
-    public function setAttachmentHeight(int $value): self
+    public function setHeight(int $value): self
     {
-        $this->attachmentHeight = $value;
+        $this->height = $value;
 
         return $this;
     }
@@ -184,9 +178,9 @@ class Attachment extends Model
      * @param int $value
      * @return $this
      */
-    public function setAttachmentDuration(int $value): self
+    public function setDuration(int $value): self
     {
-        $this->attachmentDuration = $value;
+        $this->duration = $value;
 
         return $this;
     }
@@ -196,9 +190,9 @@ class Attachment extends Model
      * @param string $value
      * @return $this
      */
-    public function setAttachmentCover(string $value): self
+    public function setCover(string $value): self
     {
-        $this->attachmentCover = $value;
+        $this->cover = $value;
 
         return $this;
     }
@@ -208,9 +202,9 @@ class Attachment extends Model
      * @param int $value
      * @return $this
      */
-    public function setAttachmentSize(int $value): self
+    public function setSize(int $value): self
     {
-        $this->attachmentSize = $value;
+        $this->size = $value;
 
         return $this;
     }
@@ -220,9 +214,9 @@ class Attachment extends Model
      * @param string $value
      * @return $this
      */
-    public function setAttachmentExtension(string $value): self
+    public function setExtension(string $value): self
     {
-        $this->attachmentExtension = $value;
+        $this->extension = $value;
 
         return $this;
     }
@@ -232,21 +226,9 @@ class Attachment extends Model
      * @param string $value
      * @return $this
      */
-    public function setAttachmentMime(string $value): self
+    public function setMime(string $value): self
     {
-        $this->attachmentMime = $value;
-
-        return $this;
-    }
-
-    /**
-     * 上传日期
-     * @param string $value
-     * @return $this
-     */
-    public function setAttachmentUploadDate(string $value): self
-    {
-        $this->attachmentUploadDate = $value;
+        $this->mime = $value;
 
         return $this;
     }
@@ -256,9 +238,9 @@ class Attachment extends Model
      * @param int $value
      * @return $this
      */
-    public function setAttachmentUploadTime(int $value): self
+    public function setUploadTime(int $value): self
     {
-        $this->attachmentUploadTime = $value;
+        $this->uploadTime = $value;
 
         return $this;
     }
@@ -285,99 +267,90 @@ class Attachment extends Model
      * 文件类型 0:图片 1:音频 2:视频 3:其它
      * @return int
      */
-    public function getAttachmentType()
+    public function getType()
     {
-        return $this->attachmentType;
+        return $this->type;
     }
 
     /**
      * 文件存储路径
      * @return string
      */
-    public function getAttachmentPath()
+    public function getPath()
     {
-        return $this->attachmentPath;
+        return $this->path;
     }
 
     /**
      * 图片宽度
      * @return int
      */
-    public function getAttachmentWidth()
+    public function getWidth()
     {
-        return $this->attachmentWidth;
+        return $this->width;
     }
 
     /**
      * 图片高度
      * @return int
      */
-    public function getAttachmentHeight()
+    public function getHeight()
     {
-        return $this->attachmentHeight;
+        return $this->height;
     }
 
     /**
      * 文件时长，单位为秒
      * @return int
      */
-    public function getAttachmentDuration()
+    public function getDuration()
     {
-        return $this->attachmentDuration;
+        return $this->duration;
     }
 
     /**
      * 文件封面路径
      * @return string
      */
-    public function getAttachmentCover()
+    public function getCover()
     {
-        return $this->attachmentCover;
+        return $this->cover;
     }
 
     /**
      * 文件尺寸，单位为字节(Byte)
      * @return int
      */
-    public function getAttachmentSize()
+    public function getSize()
     {
-        return $this->attachmentSize;
+        return $this->size;
     }
 
     /**
      * 文件后缀
      * @return string
      */
-    public function getAttachmentExtension()
+    public function getExtension()
     {
-        return $this->attachmentExtension;
+        return $this->extension;
     }
 
     /**
      * 文件MIME
      * @return string
      */
-    public function getAttachmentMime()
+    public function getMime()
     {
-        return $this->attachmentMime;
-    }
-
-    /**
-     * 上传日期
-     * @return string
-     */
-    public function getAttachmentUploadDate()
-    {
-        return $this->attachmentUploadDate;
+        return $this->mime;
     }
 
     /**
      * 上传时间
      * @return int
      */
-    public function getAttachmentUploadTime()
+    public function getUploadTime()
     {
-        return $this->attachmentUploadTime;
+        return $this->uploadTime;
     }
 
 }

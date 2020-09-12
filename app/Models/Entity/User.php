@@ -13,7 +13,7 @@ use Swoft\Db\Types;
  * 用户表
 
  * @Entity()
- * @Table(name="user")
+ * @Table(name="im_user")
  * @uses      User
  */
 class User extends Model
@@ -26,52 +26,50 @@ class User extends Model
     private $id;
 
     /**
-     * @var string $userName 姓名
-     * @Column(name="user_name", type="string", length=15)
+     * @var string $nickname 昵称
+     * @Column(name="nickname", type="string", length=15)
      * @Required()
      */
-    private $userName;
+    private $nickname;
 
     /**
-     * @var int $userGender 性别 0:未设定 1:男 2:女
-     * @Column(name="user_gender", type="tinyint")
+     * @var int $gender 性别 0:未设定 1:男 2:女
+     * @Column(name="gender", type="tinyint", default=0)
+     */
+    private $gender;
+
+    /**
+     * @var string $avatar 用户头像
+     * @Column(name="avatar", type="string", length=255, default="")
+     */
+    private $avatar;
+
+    /**
+     * @var string $phone 注册手机号
+     * @Column(name="phone", type="char", length=11)
      * @Required()
      */
-    private $userGender;
+    private $phone;
 
     /**
-     * @var string $userAvatar 头像
-     * @Column(name="user_avatar", type="string", length=200)
+     * @var string $password 密码
+     * @Column(name="password", type="string", length=100)
      * @Required()
      */
-    private $userAvatar;
+    private $password;
 
     /**
-     * @var string $userPhone 注册手机号
-     * @Column(name="user_phone", type="char", length=11)
+     * @var string $salt 密码加密盐
+     * @Column(name="salt", type="char", length=10)
      * @Required()
      */
-    private $userPhone;
+    private $salt;
 
     /**
-     * @var string $userPassword 密码
-     * @Column(name="user_password", type="string", length=100)
-     * @Required()
+     * @var int $status 账号状态 0:未激活 1:启用 -1:禁用
+     * @Column(name="status", type="tinyint", default=1)
      */
-    private $userPassword;
-
-    /**
-     * @var string $userPasswordSalt 密码加密盐
-     * @Column(name="user_password_salt", type="char", length=10)
-     * @Required()
-     */
-    private $userPasswordSalt;
-
-    /**
-     * @var int $userStatus 账号状态 0:未激活 1:启用 -1:禁用
-     * @Column(name="user_status", type="tinyint", default=1)
-     */
-    private $userStatus;
+    private $status;
 
     /**
      * @var int $createTime 注册时间
@@ -93,13 +91,13 @@ class User extends Model
     }
 
     /**
-     * 姓名
+     * 昵称
      * @param string $value
      * @return $this
      */
-    public function setUserName(string $value): self
+    public function setNickname(string $value): self
     {
-        $this->userName = $value;
+        $this->nickname = $value;
 
         return $this;
     }
@@ -109,34 +107,33 @@ class User extends Model
      * @param int $value
      * @return $this
      */
-    public function setUserGender(int $value): self
+    public function setGender(int $value): self
     {
-        $this->userGender = $value;
+        $this->gender = $value;
 
         return $this;
     }
 
     /**
-     * 头像
-     * @param string $userAvatar
+     * 用户头像
+     * @param string $value
      * @return $this
      */
-    public function setUserAvatar(string $userAvatar)
+    public function setAvatar(string $value): self
     {
-        $this->userAvatar = $userAvatar;
+        $this->avatar = $value;
 
         return $this;
     }
-
 
     /**
      * 注册手机号
      * @param string $value
      * @return $this
      */
-    public function setUserPhone(string $value): self
+    public function setPhone(string $value): self
     {
-        $this->userPhone = $value;
+        $this->phone = $value;
 
         return $this;
     }
@@ -146,9 +143,9 @@ class User extends Model
      * @param string $value
      * @return $this
      */
-    public function setUserPassword(string $value): self
+    public function setPassword(string $value): self
     {
-        $this->userPassword = $value;
+        $this->password = $value;
 
         return $this;
     }
@@ -158,9 +155,9 @@ class User extends Model
      * @param string $value
      * @return $this
      */
-    public function setUserPasswordSalt(string $value): self
+    public function setSalt(string $value): self
     {
-        $this->userPasswordSalt = $value;
+        $this->salt = $value;
 
         return $this;
     }
@@ -170,9 +167,9 @@ class User extends Model
      * @param int $value
      * @return $this
      */
-    public function setUserStatus(int $value): self
+    public function setStatus(int $value): self
     {
-        $this->userStatus = $value;
+        $this->status = $value;
 
         return $this;
     }
@@ -199,66 +196,66 @@ class User extends Model
     }
 
     /**
-     * 姓名
+     * 昵称
      * @return string
      */
-    public function getUserName()
+    public function getNickname()
     {
-        return $this->userName;
+        return $this->nickname;
     }
 
     /**
      * 性别 0:未设定 1:男 2:女
      * @return int
      */
-    public function getUserGender()
+    public function getGender()
     {
-        return $this->userGender;
+        return $this->gender;
     }
 
     /**
-     * 头像
+     * 用户头像
      * @return string
      */
-    public function getUserAvatar(): string
+    public function getAvatar()
     {
-        return $this->userAvatar;
+        return $this->avatar;
     }
 
     /**
      * 注册手机号
      * @return string
      */
-    public function getUserPhone()
+    public function getPhone()
     {
-        return $this->userPhone;
+        return $this->phone;
     }
 
     /**
      * 密码
      * @return string
      */
-    public function getUserPassword()
+    public function getPassword()
     {
-        return $this->userPassword;
+        return $this->password;
     }
 
     /**
      * 密码加密盐
      * @return string
      */
-    public function getUserPasswordSalt()
+    public function getSalt()
     {
-        return $this->userPasswordSalt;
+        return $this->salt;
     }
 
     /**
      * 账号状态 0:未激活 1:启用 -1:禁用
      * @return mixed
      */
-    public function getUserStatus()
+    public function getStatus()
     {
-        return $this->userStatus;
+        return $this->status;
     }
 
     /**

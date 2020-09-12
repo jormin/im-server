@@ -13,7 +13,7 @@ use Swoft\Db\Types;
  * 消息表
 
  * @Entity()
- * @Table(name="message")
+ * @Table(name="im_message")
  * @uses      Message
  */
 class Message extends Model
@@ -26,6 +26,13 @@ class Message extends Model
     private $id;
 
     /**
+     * @var int $sessionId 会话ID
+     * @Column(name="session_id", type="integer")
+     * @Required()
+     */
+    private $sessionId;
+
+    /**
      * @var int $senderId 发送方用户ID
      * @Column(name="sender_id", type="integer")
      * @Required()
@@ -33,11 +40,11 @@ class Message extends Model
     private $senderId;
 
     /**
-     * @var int $messageReceiverType 接收方类型 0:用户 1:客服
-     * @Column(name="message_receiver_type", type="tinyint")
+     * @var int $receiverType 接收方类型 0:用户 1:群组 2:聊天室
+     * @Column(name="receiver_type", type="tinyint")
      * @Required()
      */
-    private $messageReceiverType;
+    private $receiverType;
 
     /**
      * @var int $receiverId 接收方对应ID
@@ -47,44 +54,44 @@ class Message extends Model
     private $receiverId;
 
     /**
-     * @var int $messageType 消息类型（0:文本 1:图片 2:语音 3:视频 4:文件 5:位置)
-     * @Column(name="message_type", type="tinyint")
+     * @var int $messageTypeId 消息类型ID
+     * @Column(name="message_type_id", type="smallint")
      * @Required()
      */
-    private $messageType;
+    private $messageTypeId;
 
     /**
-     * @var null|int $attachmentId 附件ID
+     * @var int $attachmentId 附件ID
      * @Column(name="attachment_id", type="integer")
+     * @Required()
      */
     private $attachmentId;
 
     /**
-     * @var int $messageStatus 消息状态（0:已发送 1:已读(仅对用户间聊天有效) -1:已撤销）
-     * @Column(name="message_status", type="tinyint", default=0)
+     * @var int $status 消息状态（0:已发送 1:已读(仅对用户间聊天有效) -1:已撤销）
+     * @Column(name="status", type="tinyint", default=0)
      */
-    private $messageStatus;
+    private $status;
 
     /**
-     * @var string $messageSendDate 发送日期
-     * @Column(name="message_send_date", type="char", length=10)
+     * @var int $sendTime 发送时间
+     * @Column(name="send_time", type="integer")
      * @Required()
      */
-    private $messageSendDate;
+    private $sendTime;
 
     /**
-     * @var int $messageSendTime 发送时间
-     * @Column(name="message_send_time", type="integer")
-     * @Required()
+     * @var int $readTime 阅读时间
+     * @Column(name="read_time", type="integer")
      */
-    private $messageSendTime;
+    private $readTime;
 
     /**
-     * @var int $messageRevokeTime 撤销时间
-     * @Column(name="message_revoke_time", type="integer")
+     * @var int $revokeTime 撤销时间
+     * @Column(name="revoke_time", type="integer")
      * @Required()
      */
-    private $messageRevokeTime;
+    private $revokeTime;
 
     /**
      * ID
@@ -94,6 +101,18 @@ class Message extends Model
     public function setId(int $value)
     {
         $this->id = $value;
+
+        return $this;
+    }
+
+    /**
+     * 会话ID
+     * @param int $value
+     * @return $this
+     */
+    public function setSessionId(int $value): self
+    {
+        $this->sessionId = $value;
 
         return $this;
     }
@@ -111,13 +130,13 @@ class Message extends Model
     }
 
     /**
-     * 接收方类型 0:用户 1:客服
+     * 接收方类型 0:用户 1:群组 2:聊天室
      * @param int $value
      * @return $this
      */
-    public function setMessageReceiverType(int $value): self
+    public function setReceiverType(int $value): self
     {
-        $this->messageReceiverType = $value;
+        $this->receiverType = $value;
 
         return $this;
     }
@@ -135,23 +154,27 @@ class Message extends Model
     }
 
     /**
-     * 消息类型（0:文本 1:图片 2:语音 3:视频 4:文件 5:位置)
+     * 消息类型ID
      * @param int $value
      * @return $this
      */
-    public function setMessageType(int $value): self
+    public function setMessageTypeId(int $value): self
     {
-        $this->messageType = $value;
+        $this->messageTypeId = $value;
 
         return $this;
     }
 
     /**
-     * @param int|null $attachmentId
+     * 附件ID
+     * @param int $value
+     * @return $this
      */
-    public function setAttachmentId(?int $attachmentId): void
+    public function setAttachmentId(int $value): self
     {
-        $this->attachmentId = $attachmentId;
+        $this->attachmentId = $value;
+
+        return $this;
     }
 
     /**
@@ -159,21 +182,9 @@ class Message extends Model
      * @param int $value
      * @return $this
      */
-    public function setMessageStatus(int $value): self
+    public function setStatus(int $value): self
     {
-        $this->messageStatus = $value;
-
-        return $this;
-    }
-
-    /**
-     * 发送日期
-     * @param string $value
-     * @return $this
-     */
-    public function setMessageSendDate(string $value): self
-    {
-        $this->messageSendDate = $value;
+        $this->status = $value;
 
         return $this;
     }
@@ -183,9 +194,21 @@ class Message extends Model
      * @param int $value
      * @return $this
      */
-    public function setMessageSendTime(int $value): self
+    public function setSendTime(int $value): self
     {
-        $this->messageSendTime = $value;
+        $this->sendTime = $value;
+
+        return $this;
+    }
+
+    /**
+     * 阅读时间
+     * @param int $value
+     * @return $this
+     */
+    public function setReadTime(int $value): self
+    {
+        $this->readTime = $value;
 
         return $this;
     }
@@ -195,9 +218,9 @@ class Message extends Model
      * @param int $value
      * @return $this
      */
-    public function setMessageRevokeTime(int $value): self
+    public function setRevokeTime(int $value): self
     {
-        $this->messageRevokeTime = $value;
+        $this->revokeTime = $value;
 
         return $this;
     }
@@ -212,6 +235,15 @@ class Message extends Model
     }
 
     /**
+     * 会话ID
+     * @return int
+     */
+    public function getSessionId()
+    {
+        return $this->sessionId;
+    }
+
+    /**
      * 发送方用户ID
      * @return int
      */
@@ -221,12 +253,12 @@ class Message extends Model
     }
 
     /**
-     * 接收方类型 0:用户 1:客服
+     * 接收方类型 0:用户 1:群组 2:聊天室
      * @return int
      */
-    public function getMessageReceiverType()
+    public function getReceiverType()
     {
-        return $this->messageReceiverType;
+        return $this->receiverType;
     }
 
     /**
@@ -239,12 +271,12 @@ class Message extends Model
     }
 
     /**
-     * 消息类型（0:文本 1:图片 2:语音 3:视频 4:文件 5:位置)
+     * 消息类型ID
      * @return int
      */
-    public function getMessageType()
+    public function getMessageTypeId()
     {
-        return $this->messageType;
+        return $this->messageTypeId;
     }
 
     /**
@@ -260,36 +292,36 @@ class Message extends Model
      * 消息状态（0:已发送 1:已读(仅对用户间聊天有效) -1:已撤销）
      * @return int
      */
-    public function getMessageStatus()
+    public function getStatus()
     {
-        return $this->messageStatus;
-    }
-
-    /**
-     * 发送日期
-     * @return string
-     */
-    public function getMessageSendDate()
-    {
-        return $this->messageSendDate;
+        return $this->status;
     }
 
     /**
      * 发送时间
      * @return int
      */
-    public function getMessageSendTime()
+    public function getSendTime()
     {
-        return $this->messageSendTime;
+        return $this->sendTime;
+    }
+
+    /**
+     * 阅读时间
+     * @return int
+     */
+    public function getReadTime()
+    {
+        return $this->readTime;
     }
 
     /**
      * 撤销时间
      * @return int
      */
-    public function getMessageRevokeTime()
+    public function getRevokeTime()
     {
-        return $this->messageRevokeTime;
+        return $this->revokeTime;
     }
 
 }

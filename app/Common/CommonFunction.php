@@ -13,6 +13,7 @@ namespace app\Common;
  */
 class CommonFunction
 {
+
     /*
      * 随机获取字符串
      */
@@ -212,5 +213,22 @@ class CommonFunction
             }
         }
         return $fdate;
+    }
+
+    /**
+     * 获取自定义配置
+     * @param $param
+     * @return mixed
+     */
+    public static function getCustomConfig($param){
+        return config('custom.'.$param);
+    }
+
+    /**
+     * 获取加密key
+     * @return mixed
+     */
+    public static function getEncryptKey(){
+        return self::getCustomConfig('encryptKey');
     }
 }
