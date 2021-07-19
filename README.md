@@ -1,3 +1,3 @@
-## About
+### About
 
-聊天系统服务端
+Golang 实现的聊天服务器
